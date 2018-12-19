@@ -7,7 +7,7 @@ jobs:
     docker:
       - image: circleci/golang:latest
 
-    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+    working_directory: /go/src/github.com/chbmuc/md-sleep
     steps:
       - checkout
       - run: go get -u github.com/mitchellh/gox
@@ -16,7 +16,7 @@ jobs:
       - run:
           name: cross compile
           command: |
-            gox -os="linux" -arch="amd64 arm arm64" -output="dist/spotifycli_{{.Arch}}"
+            gox -os="linux" -arch="amd64 arm arm64" -output="dist/md-sleep_{{.Arch}}"
       - add_ssh_keys
       - run:
           name: create release
