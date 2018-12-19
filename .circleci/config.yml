@@ -12,7 +12,6 @@ jobs:
       - checkout
       - run: go get -u github.com/mitchellh/gox
       - run: go get -u github.com/tcnksm/ghr
-      - run: go get -u github.com/stevenmatthewt/semantics
       - run:
           name: cross compile
           command: |
@@ -21,9 +20,4 @@ jobs:
       - run:
           name: create release
           command: |
-            tag=$(semantics --output-tag)
-            if [ "$tag" ]; then
-              ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace $tag dist/
-            else
-              echo "The commit message(s) did not indicate a major/minor/patch version."
-            fi
+            ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` dist/
