@@ -1,0 +1,14 @@
+post_remove() {
+	systemctl stop md-sleep.service 2>/dev/null
+	systemctl disable md-sleep.service 2>/dev/null
+}
+
+post_install() {
+	echo -e "Enable and start md-sleep.service with\n # systemctl enable md-sleep.service && systemctl start md-sleep.service"
+}
+
+
+
+post_upgrade() {
+        echo -e "Please restart md-sleep.service with\n # systemctl restart md-sleep.service"
+}

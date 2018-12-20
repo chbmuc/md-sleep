@@ -1,0 +1,11 @@
+[Unit]
+Description=md-sleep: watch md-raid array and spin down idle disks
+
+[Service]
+EnvironmentFile=/etc/md-sleep.conf
+ExecStart=/usr/sbin/md-sleep $MDRAID
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
